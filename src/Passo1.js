@@ -3,10 +3,6 @@ import { useHistory } from 'react-router-dom'
 import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { PrimaryButton } from './components/PrimaryButton'
-import { MainContainer } from './components/MainContainer'
-import { Form } from './components/Form';
-import { Input } from './components/Input';
 import * as yup from 'yup'
 
 const schema = yup.object().shape({
@@ -30,36 +26,38 @@ export const Passo1 = () => {
   })
 
   const onSubmit = (data) => {
-    history.push('./step2')
+    history.push('./passo2')
     setValues(data)
   }
 
   return (
-    <MainContainer>
-      <div component='h2' variant='h5'>
-        🦄 Passo 1
-      </div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
+    <div>
+      <h2 style={{textAlign: 'center', marginBottom: 20}}>
+        Preencha o cadastro e receba as melhores Ofertas de Crédito em menos de 3 minutos
+      </h2>
+      <form style={{display: 'flex', flexDirection: 'column'}} onSubmit={handleSubmit(onSubmit)}>
+        <input
           ref={register}
           id='firstName'
           type='text'
           label='First Name'
           name='firstName'
-          error={!!errors.firstName}
-          helperText={errors?.firstName?.message}
         />
-        <Input
+        <label className="helper-text">
+          {errors?.firstName?.message}
+        </label>
+        <input
           ref={register}
           id='lastName'
           type='text'
           label='Last Name'
           name='lastName'
-          error={!!errors.lastName}
-          helperText={errors?.lastName?.message}
         />
-        <PrimaryButton>Next</PrimaryButton>
-      </Form>
-    </MainContainer>
+        <label className="helper-text">
+          {errors?.lastName?.message}
+        </label>
+        <button>Cadastrar</button>
+      </form>
+    </div>
   )
 }
