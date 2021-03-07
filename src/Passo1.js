@@ -4,6 +4,7 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import steps from './images/passo-1.jpg';
 
 const schema = yup.object().shape({
   fullName: yup
@@ -32,8 +33,9 @@ export const Passo1 = () => {
 
   return (
     <div>
-      <h2 style={{textAlign: 'center', marginBottom: 60}}>
+      <h2 style={{textAlign: 'center', marginBottom: 30}}>
         Preencha o cadastro e receba as melhores Ofertas de Crédito em menos de 3 minutos
+        <img style={{marginTop: 30, width: 445, height: 79}} src={steps} alt="Steps" />
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
 
