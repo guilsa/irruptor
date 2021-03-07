@@ -22,12 +22,25 @@ h2 {
   font-weight: 100;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 input {
   font-size: 14px;
   padding: 18px 45px 18px 25px;
+  margin-bottom: 10px;
+}
+
+input[type=text] {
+  border-width: 1px;
 }
 
 label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #898989;
   margin-bottom: 10px;
 }
 
