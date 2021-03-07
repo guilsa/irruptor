@@ -21,7 +21,17 @@ export const Passo1 = () => {
   const { setValues, data } = useData()
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: { fullName: data.fullName, email: data.email },
+    defaultValues: { 
+      fullName: data.fullName, 
+      email: data.email,
+      cpf: data.cpf,
+      dob: data.dob,
+      cel: data.cel,
+      cep: data.cep,
+      income: data.income,
+      job: data.job,
+      password: data.password,
+    },
     mode: 'onBlur',
     resolver: yupResolver(schema),
   })
@@ -70,7 +80,7 @@ export const Passo1 = () => {
           ref={register}
           id='cpf'
           type='text'
-          label='CPF'
+          label='cpf'
           name='cpf'
         />
         <label className="helper-text">
@@ -141,7 +151,7 @@ export const Passo1 = () => {
         <input
           ref={register}
           id='password'
-          type='text'
+          type='password'
           label='password'
           name='password'
         />

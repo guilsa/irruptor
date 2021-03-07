@@ -28,13 +28,10 @@ form {
 }
 
 input {
+  border-width: 1px;
   font-size: 14px;
   padding: 18px 45px 18px 25px;
   margin-bottom: 10px;
-}
-
-input[type=text] {
-  border-width: 1px;
 }
 
 label {
