@@ -11,8 +11,8 @@ export const DataProvider = ({children}) => {
     dob: '15/09/1983',
     cel: '(85) 11934-9722',
     cep: '24904-495',
-    income: '$2000',
-    job: 'Artista',
+    incomeBracket: '$2000',
+    job: 'EMPRESARIO',
     password: 'foobar123',
   })
 

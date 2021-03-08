@@ -28,7 +28,7 @@ export const Passo1 = () => {
       dob: data.dob,
       cel: data.cel,
       cep: data.cep,
-      income: data.income,
+      incomeBracket: data.incomeBracket,
       job: data.job,
       password: data.password,
     },
@@ -37,6 +37,7 @@ export const Passo1 = () => {
   })
 
   const onSubmit = (data) => {
+    console.log('data', data);
     history.push('./passo2')
     setValues(data)
   }
@@ -123,26 +124,35 @@ export const Passo1 = () => {
           {errors?.cep?.message}
         </label>
 
+
         <label>De quanto é a sua renda?</label>
-        <input
-          ref={register}
-          id='income'
-          type='text'
-          label='income'
-          name='income'
-        />
+        <select ref={register} className='select optional valid' label='income' name='income' id='income-bracket' aria-invalid='false'>
+          <option>Selecione</option>
+          <option value='RENDA_MENOR_1000'>Até R$ 1.000</option>
+          <option value='RENDA_MENOR_2000'>De R$ 1.000 até R$ 2.000</option>
+          <option value='RENDA_MENOR_3000'>De R$ 2.000 até R$ 3.000</option>
+          <option value='RENDA_MENOR_4000'>De R$ 3.000 até R$ 4.000</option>
+          <option value='RENDA_MENOR_5000'>De R$ 4.000 até R$ 5.000</option>
+          <option value='RENDA_MAIOR_5000'>Acima de R$ 5.000</option>
+        </select>
         <label className='helper-text'>
-          {errors?.income?.message}
+          {errors?.incomeBracket?.message}
         </label>
 
+
         <label>Trabalha como</label>
-        <input
-          ref={register}
-          id='job'
-          type='text'
-          label='job'
-          name='job'
-        />
+        <select ref={register} className='select optional' label='job' name='job' id='job'>
+          <option>Selecione</option>
+          <option value='APOSENTADO_PENSIONISTA'>Aposentado ou Pensionista</option>
+          <option value='AUTONOMO'>Autônomo</option>
+          <option value='EMPRESARIO'>Empresário ou Empregador</option>
+          <option value='PROFISSIONAL_LIBERAL'>Profissional Liberal</option>
+          <option value='ASSALARIADO'>Funcionário com carteira assinada (CLT)</option>
+          <option value='FUNCIONARIO_PUBLICO'>Funcionário Público ou Militar</option>
+          <option value='DESEMPREGADO'>Desempregado</option>
+        </select>
+
+
         <label className='helper-text'>
           {errors?.job?.message}
         </label>
