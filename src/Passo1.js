@@ -4,17 +4,17 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import steps from './images/passo-1.jpg';
+import steps from './images/passo-1.jpg'
 
 const schema = yup.object().shape({
   fullName: yup
     .string()
-    .matches(/^([^0-9]*)$/, "Nome não pode ter números")
-    .required("Esse campo é necessário"),
+    .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
+    .required('Esse campo é necessário'),
   email: yup
     .string()
-    // .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
-    .required("Esse campo é necessário"),
+    // .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
+    .required('Esse campo é necessário'),
 });
 
 export const Passo1 = () => {
@@ -45,7 +45,7 @@ export const Passo1 = () => {
     <div>
       <h2 style={{textAlign: 'center', marginBottom: 30}}>
         Preencha o cadastro e receba as melhores Ofertas de Crédito em menos de 3 minutos
-        <img style={{marginTop: 30, width: 445, height: 79}} src={steps} alt="Steps" />
+        <img style={{marginTop: 30, width: 445, height: 79}} src={steps} alt='Steps' />
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -57,7 +57,7 @@ export const Passo1 = () => {
           label='Nome Completo'
           name='fullName'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.fullName?.message}
         </label>
 
@@ -70,7 +70,7 @@ export const Passo1 = () => {
           label='email'
           name='email'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.email?.message}
         </label>
 
@@ -83,7 +83,7 @@ export const Passo1 = () => {
           label='cpf'
           name='cpf'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.cpf?.message}
         </label>
 
@@ -95,7 +95,7 @@ export const Passo1 = () => {
           label='Data de nascimento'
           name='dob'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.dob?.message}
         </label>
 
@@ -107,7 +107,7 @@ export const Passo1 = () => {
           label='Número de celular'
           name='cel'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.cel?.message}
         </label>
 
@@ -119,7 +119,7 @@ export const Passo1 = () => {
           label='CEP'
           name='cep'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.cep?.message}
         </label>
 
@@ -131,7 +131,7 @@ export const Passo1 = () => {
           label='income'
           name='income'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.income?.message}
         </label>
 
@@ -143,7 +143,7 @@ export const Passo1 = () => {
           label='job'
           name='job'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.job?.message}
         </label>
 
@@ -155,7 +155,7 @@ export const Passo1 = () => {
           label='password'
           name='password'
         />
-        <label className="helper-text">
+        <label className='helper-text'>
           {errors?.password?.message}
         </label>
 
