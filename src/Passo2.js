@@ -41,10 +41,16 @@ export const Passo2 = (props) => {
       loan_intent: data.loan_intent,
     },
     mode: 'onBlur',
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   })
 
-  const birthState = watch('birth_state', props.birth_state)
+  // const birthState = watch('birth_state', false)
+  // {birthState &&
+  //   cities[birthState].map((city) => (
+  //     <option key={city} value={city}>
+  //       {city}
+  //     </option>
+  //   ))}
 
   const onSubmit = (data) => {
     console.log('data', data)
@@ -71,10 +77,10 @@ export const Passo2 = (props) => {
         <label>Nome completo mãe</label>
         <input
           ref={register}
-          id='mother-full-name'
+          id='mother_full_name'
           type='text'
           label='Nome completo mãe'
-          name='mother-full-name'
+          name='mother_full_name'
         />
         <label className='helper-text'>
           {errors?.mother_full_name?.message}
@@ -148,12 +154,6 @@ export const Passo2 = (props) => {
           aria-invalid='false'
         >
           <option>Selecione</option>
-          {birthState &&
-            cities[birthState].map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
         </select>
         <label className='helper-text'>{errors?.birth_city?.message}</label>
 
