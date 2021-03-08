@@ -15,14 +15,14 @@ const schema = yup.object().shape({
     .string()
     // .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
     .required('Esse campo é necessário'),
-});
+})
 
 export const Passo1 = () => {
   const { setValues, data } = useData()
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: { 
-      fullName: data.fullName, 
+    defaultValues: {
+      fullName: data.fullName,
       email: data.email,
       cpf: data.cpf,
       dob: data.dob,
@@ -37,19 +37,23 @@ export const Passo1 = () => {
   })
 
   const onSubmit = (data) => {
-    console.log('data', data);
+    console.log('data', data)
     history.push('./passo2')
     setValues(data)
   }
 
   return (
     <div>
-      <h2 style={{textAlign: 'center', marginBottom: 30}}>
-        Preencha o cadastro e receba as melhores Ofertas de Crédito em menos de 3 minutos
-        <img style={{marginTop: 30, width: 445, height: 79}} src={steps} alt='Steps' />
+      <h2 style={{ textAlign: 'center', marginBottom: 30 }}>
+        Preencha o cadastro e receba as melhores Ofertas de Crédito em menos de
+        3 minutos
+        <img
+          style={{ marginTop: 30, width: 445, height: 79 }}
+          src={steps}
+          alt='Steps'
+        />
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-
         <label>Nome Completo</label>
         <input
           ref={register}
@@ -58,10 +62,7 @@ export const Passo1 = () => {
           label='Nome Completo'
           name='fullName'
         />
-        <label className='helper-text'>
-          {errors?.fullName?.message}
-        </label>
-
+        <label className='helper-text'>{errors?.fullName?.message}</label>
 
         <label>E-mail</label>
         <input
@@ -71,22 +72,11 @@ export const Passo1 = () => {
           label='email'
           name='email'
         />
-        <label className='helper-text'>
-          {errors?.email?.message}
-        </label>
-
+        <label className='helper-text'>{errors?.email?.message}</label>
 
         <label>CPF</label>
-        <input
-          ref={register}
-          id='cpf'
-          type='text'
-          label='cpf'
-          name='cpf'
-        />
-        <label className='helper-text'>
-          {errors?.cpf?.message}
-        </label>
+        <input ref={register} id='cpf' type='text' label='cpf' name='cpf' />
+        <label className='helper-text'>{errors?.cpf?.message}</label>
 
         <label>Data de nascimento</label>
         <input
@@ -96,9 +86,7 @@ export const Passo1 = () => {
           label='Data de nascimento'
           name='dob'
         />
-        <label className='helper-text'>
-          {errors?.dob?.message}
-        </label>
+        <label className='helper-text'>{errors?.dob?.message}</label>
 
         <label>Número de celular</label>
         <input
@@ -108,25 +96,21 @@ export const Passo1 = () => {
           label='Número de celular'
           name='cel'
         />
-        <label className='helper-text'>
-          {errors?.cel?.message}
-        </label>
+        <label className='helper-text'>{errors?.cel?.message}</label>
 
         <label>CEP</label>
-        <input
-          ref={register}
-          id='cep'
-          type='text'
-          label='CEP'
-          name='cep'
-        />
-        <label className='helper-text'>
-          {errors?.cep?.message}
-        </label>
-
+        <input ref={register} id='cep' type='text' label='CEP' name='cep' />
+        <label className='helper-text'>{errors?.cep?.message}</label>
 
         <label>De quanto é a sua renda?</label>
-        <select ref={register} className='select optional valid' label='income' name='income' id='income-bracket' aria-invalid='false'>
+        <select
+          ref={register}
+          className='select optional valid'
+          label='income'
+          name='income'
+          id='income-bracket'
+          aria-invalid='false'
+        >
           <option>Selecione</option>
           <option value='RENDA_MENOR_1000'>Até R$ 1.000</option>
           <option value='RENDA_MENOR_2000'>De R$ 1.000 até R$ 2.000</option>
@@ -135,27 +119,33 @@ export const Passo1 = () => {
           <option value='RENDA_MENOR_5000'>De R$ 4.000 até R$ 5.000</option>
           <option value='RENDA_MAIOR_5000'>Acima de R$ 5.000</option>
         </select>
-        <label className='helper-text'>
-          {errors?.incomeBracket?.message}
-        </label>
-
+        <label className='helper-text'>{errors?.incomeBracket?.message}</label>
 
         <label>Trabalha como</label>
-        <select ref={register} className='select optional' label='job' name='job' id='job'>
+        <select
+          ref={register}
+          className='select optional'
+          label='job'
+          name='job'
+          id='job'
+        >
           <option>Selecione</option>
-          <option value='APOSENTADO_PENSIONISTA'>Aposentado ou Pensionista</option>
+          <option value='APOSENTADO_PENSIONISTA'>
+            Aposentado ou Pensionista
+          </option>
           <option value='AUTONOMO'>Autônomo</option>
           <option value='EMPRESARIO'>Empresário ou Empregador</option>
           <option value='PROFISSIONAL_LIBERAL'>Profissional Liberal</option>
-          <option value='ASSALARIADO'>Funcionário com carteira assinada (CLT)</option>
-          <option value='FUNCIONARIO_PUBLICO'>Funcionário Público ou Militar</option>
+          <option value='ASSALARIADO'>
+            Funcionário com carteira assinada (CLT)
+          </option>
+          <option value='FUNCIONARIO_PUBLICO'>
+            Funcionário Público ou Militar
+          </option>
           <option value='DESEMPREGADO'>Desempregado</option>
         </select>
 
-
-        <label className='helper-text'>
-          {errors?.job?.message}
-        </label>
+        <label className='helper-text'>{errors?.job?.message}</label>
 
         <label>Criar senha</label>
         <input
@@ -165,10 +155,7 @@ export const Passo1 = () => {
           label='password'
           name='password'
         />
-        <label className='helper-text'>
-          {errors?.password?.message}
-        </label>
-
+        <label className='helper-text'>{errors?.password?.message}</label>
 
         <button>Cadastrar</button>
       </form>
