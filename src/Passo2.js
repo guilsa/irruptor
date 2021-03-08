@@ -2,27 +2,27 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+// import { yupResolver } from '@hookform/resolvers/yup'
+// import * as yup from 'yup'
 import steps from './images/passo-2.jpg'
 
-import cities from './static/citiesToState'
+// import cities from './static/citiesToState'
 
-const schema = yup.object().shape({
-  fullName: yup
-    .string()
-    .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
-    .required('Esse campo é necessário'),
-  email: yup
-    .string()
-    // .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
-    .required('Esse campo é necessário'),
-})
+// const schema = yup.object().shape({
+//   fullName: yup
+//     .string()
+//     .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
+//     .required('Esse campo é necessário'),
+//   email: yup
+//     .string()
+//     // .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
+//     .required('Esse campo é necessário'),
+// })
 
 export const Passo2 = (props) => {
   const { setValues, data } = useData()
   const history = useHistory()
-  const { register, watch, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       mother_full_name: data.mother_full_name,
       gender: data.gender,
