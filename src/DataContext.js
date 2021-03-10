@@ -4,13 +4,13 @@ const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
   const [data, setData] = useState({
-    fullName: '234234',
+    full_name: 'Jorge João',
     email: 'jorge@leao.com',
     cpf: '696.604.737-61',
     dob: '15/09/1983',
     cel: '(85) 11934-9722',
     cep: '24904-495',
-    incomeBracket: '$2000',
+    income_bracket: '$2000',
     job: 'EMPRESARIO',
     password: 'foobar123',
     mother_full_name: 'mae',

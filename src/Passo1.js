@@ -8,7 +8,7 @@ import * as yup from 'yup'
 import { Button, Row, Col, Form } from 'react-bootstrap'
 
 const schema = yup.object().shape({
-  fullName: yup
+  full_name: yup
     .string()
     .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
     .required('Esse campo é necessário'),
@@ -23,13 +23,13 @@ export const Passo1 = () => {
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
-      fullName: data.fullName,
+      full_name: data.full_name,
       email: data.email,
       cpf: data.cpf,
       dob: data.dob,
       cel: data.cel,
       cep: data.cep,
-      incomeBracket: data.incomeBracket,
+      income_bracket: data.income_bracket,
       job: data.job,
       password: data.password,
     },
@@ -42,6 +42,66 @@ export const Passo1 = () => {
     console.log('data', data)
     history.push('./passo2')
     setValues(data)
+  }
+
+  const inputs = [
+    { label: 'Nome Completo', id: 'full_name' },
+    { label: 'E-mail', id: 'email' },
+    { label: 'CPF', id: 'cpf' },
+    { label: 'Data de Nascimento', id: 'dob' },
+    { label: 'Número de celular', id: 'cel' },
+    { label: 'CEP', id: 'cep' },
+    { label: 'De quanto é a sua renda?', id: 'income_bracket' },
+    { label: 'Trabalha como', id: 'job' },
+    // { id: 'demo', component: () => <div>I'm a div!</div> },
+  ]
+
+  const renderForms = (inputs) => {
+    const form = []
+    let fieldsRow = []
+    const renderRow = (props, id) => <Row key={id}>{props}</Row>
+
+    inputs.forEach((input, idx) => {
+
+      const { label, id } = input
+      let field
+
+      if (id === undefined)
+        console.warn('This field needs an id.')
+
+      if (label !== undefined) {
+        field = ( 
+          <Form.Group key={id} as={Col}>
+            <Form.Label>{label}</Form.Label>
+            <Form.Control
+              ref={register}
+              id={id}
+              type={input.type === undefined ? 'text' : input.type}
+              label={label}
+              name={id}
+              isInvalid={errors[id] && !!errors[id]}
+            />
+            <Form.Control.Feedback type='invalid'>
+              {errors[id] && errors[id].message && errors[id].message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        )
+      } else {
+        field = React.createElement(input.component, { key: id })
+      }
+
+      fieldsRow.push(field)
+
+      if (idx % 2) {
+        form.push(renderRow(fieldsRow.map(field => field), id))
+        fieldsRow = []
+      } else if (idx === inputs.length - 1) {
+        form.push(renderRow(fieldsRow.map(field => field), id))
+      }
+
+    })
+
+    return form
   }
 
   return (
@@ -62,163 +122,11 @@ export const Passo1 = () => {
           </p>
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
+
+          { renderForms(inputs) }
+
           <Row>
             <Form.Group as={Col}>
-              <Form.Label>Nome Completo</Form.Label>
-              <Form.Control
-                ref={register}
-                id='fullName'
-                type='text'
-                label='Nome Completo'
-                name='fullName'
-                isInvalid={!!errors?.fullName}
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.fullName?.message}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Col>
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control
-                ref={register}
-                id='email'
-                type='text'
-                label='email'
-                name='email'
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.email?.message}
-              </Form.Control.Feedback>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <Form.Label>CPF</Form.Label>
-              <Form.Control
-                ref={register}
-                id='cpf'
-                type='text'
-                label='cpf'
-                name='cpf'
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.cpf?.message}
-              </Form.Control.Feedback>
-            </Col>
-
-            <Col>
-              <Form.Label>Data de nascimento</Form.Label>
-              <Form.Control
-                ref={register}
-                id='dob'
-                type='text'
-                label='Data de nascimento'
-                name='dob'
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.dob?.message}
-              </Form.Control.Feedback>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <Form.Label>Número de celular</Form.Label>
-              <Form.Control
-                ref={register}
-                id='cel'
-                type='text'
-                label='Número de celular'
-                name='cel'
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.cel?.message}
-              </Form.Control.Feedback>
-            </Col>
-            <Col>
-              <Form.Label>CEP</Form.Label>
-              <Form.Control
-                ref={register}
-                id='cep'
-                type='text'
-                label='CEP'
-                name='cep'
-              />
-              <Form.Control.Feedback type='invalid'>
-                {errors?.cep?.message}
-              </Form.Control.Feedback>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <Form.Label>De quanto é a sua renda?</Form.Label>
-              <Form.Control
-                as='select'
-                ref={register}
-                className='select optional valid'
-                label='income'
-                name='income'
-                id='income-bracket'
-                aria-invalid='false'
-              >
-                <option>Selecione</option>
-                <option value='RENDA_MENOR_1000'>Até R$ 1.000</option>
-                <option value='RENDA_MENOR_2000'>
-                  De R$ 1.000 até R$ 2.000
-                </option>
-                <option value='RENDA_MENOR_3000'>
-                  De R$ 2.000 até R$ 3.000
-                </option>
-                <option value='RENDA_MENOR_4000'>
-                  De R$ 3.000 até R$ 4.000
-                </option>
-                <option value='RENDA_MENOR_5000'>
-                  De R$ 4.000 até R$ 5.000
-                </option>
-                <option value='RENDA_MAIOR_5000'>Acima de R$ 5.000</option>
-              </Form.Control>
-              <Form.Control.Feedback type='invalid'>
-                {errors?.incomeBracket?.message}
-              </Form.Control.Feedback>
-            </Col>
-
-            <Col>
-              <Form.Label>Trabalha como</Form.Label>
-              <Form.Control
-                as='select'
-                ref={register}
-                className='select optional'
-                label='job'
-                name='job'
-                id='job'
-              >
-                <option>Selecione</option>
-                <option value='APOSENTADO_PENSIONISTA'>
-                  Aposentado ou Pensionista
-                </option>
-                <option value='AUTONOMO'>Autônomo</option>
-                <option value='EMPRESARIO'>Empresário ou Empregador</option>
-                <option value='PROFISSIONAL_LIBERAL'>
-                  Profissional Liberal
-                </option>
-                <option value='ASSALARIADO'>
-                  Funcionário com carteira assinada (CLT)
-                </option>
-                <option value='FUNCIONARIO_PUBLICO'>
-                  Funcionário Público ou Militar
-                </option>
-                <option value='DESEMPREGADO'>Desempregado</option>
-              </Form.Control>
-              <Form.Control.Feedback type='invalid'>
-                {errors?.job?.message}
-              </Form.Control.Feedback>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
               <Form.Label>Criar senha</Form.Label>
               <Form.Control
                 ref={register}
@@ -230,7 +138,7 @@ export const Passo1 = () => {
               <Form.Control.Feedback type='invalid'>
                 {errors?.password?.message}
               </Form.Control.Feedback>
-            </Col>
+            </Form.Group>
           </Row>
 
           <hr className='my-4' />
