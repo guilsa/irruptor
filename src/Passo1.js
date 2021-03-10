@@ -59,6 +59,10 @@ export const Passo1 = () => {
   const jobOptions = parseSelectOptions(jobs)
   const incomeOptions = parseSelectOptions(incomes)
 
+  // const hardCodedExampleForSelectOptions = [
+  //   { value: '', label: '' }
+  // ]
+
   const inputs = [
     { label: 'Nome Completo', id: 'full_name' },
     { label: 'E-mail', id: 'email' },
