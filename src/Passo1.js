@@ -4,6 +4,7 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { incomes, jobs } from './static/selectInputOptions'
 
 import { Button, Row, Col, Form } from 'react-bootstrap'
 
@@ -44,24 +45,19 @@ export const Passo1 = () => {
     setValues(data)
   }
 
-  const incomeOptions = [
-    { value: 'RENDA_MENOR_1000', label: 'Até R$ 1.000' },
-    { value: 'RENDA_MENOR_2000', label: 'De R$ 1.000 até R$ 2.000' },
-    { value: 'RENDA_MENOR_3000', label: 'De R$ 2.000 até R$ 3.000' },
-    { value: 'RENDA_MENOR_4000', label: 'De R$ 3.000 até R$ 4.000' },
-    { value: 'RENDA_MENOR_5000', label: 'De R$ 4.000 até R$ 5.000' },
-    { value: 'RENDA_MAIOR_5000', label: 'Acima de R$ 5.000' },
-  ]
+  const parseSelectOptions = (options) => {
+    const array = []
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(options, 'text/html')
+    const elements = doc.getElementsByTagName('option')
+    for (const el of elements) {
+      array.push({ value: el.value, label: el.text })
+    }
+    return array
+  }
 
-  const jobOptions = [
-    { value: 'APOSENTADO_PENSIONISTA', label: 'Aposentado ou Pensionista' },
-    { value: 'AUTONOMO', label: 'Autônomo' },
-    { value: 'EMPRESARIO', label: 'Empresário ou Empregador' },
-    { value: 'PROFISSIONAL_LIBERAL', label: 'Profissional Liberal' },
-    { value: 'ASSALARIADO', label: 'Funcionário com carteira assinada (CLT)' },
-    { value: 'FUNCIONARIO_PUBLICO', label: 'Funcionário Público ou Militar' },
-    { value: 'DESEMPREGADO', label: 'Desempregado' },
-  ]
+  const jobOptions = parseSelectOptions(jobs)
+  const incomeOptions = parseSelectOptions(incomes)
 
   const inputs = [
     { label: 'Nome Completo', id: 'full_name' },
