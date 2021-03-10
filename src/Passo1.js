@@ -38,7 +38,7 @@ export const Passo1 = () => {
   })
 
   const onSubmit = (event, data) => {
-    console.log('event', event);
+    console.log('event', event)
     console.log('data', data)
     history.push('./passo2')
     setValues(data)
@@ -70,12 +70,12 @@ export const Passo1 = () => {
     { label: 'Data de Nascimento', id: 'dob' },
     { label: 'Número de celular', id: 'cel' },
     { label: 'CEP', id: 'cep' },
-    { 
-      label: 'De quanto é a sua renda?', 
-      id: 'income_bracket', 
+    {
+      label: 'De quanto é a sua renda?',
+      id: 'income_bracket',
       selectOptions: incomeOptions,
     },
-    { 
+    {
       label: 'Trabalha como',
       id: 'job',
       selectOptions: jobOptions,
@@ -89,33 +89,39 @@ export const Passo1 = () => {
     const renderRow = (props, id) => <Row key={id}>{props}</Row>
 
     inputs.forEach((input, idx) => {
-
       const { label, id } = input
+      const defaultProps = {
+        ref: register,
+        id: id,
+        label: label,
+        name: id,
+        isInvalid: errors[id] && !!errors[id],
+      }
       let field
 
       if (id === undefined)
-        console.warn('Oops! Found a field without an id! Check the inputs variable.')
+        console.warn(
+          'Oops! Found a field without an id! Check the inputs variable.'
+        )
 
       if (label !== undefined) {
         if (input.selectOptions) {
-          field = ( 
+          field = (
             <Form.Group key={id} as={Col}>
               <Form.Label>{label}</Form.Label>
               <Form.Control
+                {...defaultProps}
                 as='select'
-                ref={register}
                 className='select optional valid'
-                id={id}
-                label={label}
-                name={id}
-                isInvalid={errors[id] && !!errors[id]}
               >
-              <option>Selecione</option>
-              {
-                input.selectOptions.map(select => {
-                  return <option value={select.value}>{select.label}</option>
-                })
-              }
+                <option>Selecione</option>
+                {input.selectOptions.map((select) => {
+                  return (
+                    <option key={select.value} value={select.value}>
+                      {select.label}
+                    </option>
+                  )
+                })}
               </Form.Control>
               <Form.Control.Feedback type='invalid'>
                 {errors[id] && errors[id].message && errors[id].message}
@@ -123,17 +129,10 @@ export const Passo1 = () => {
             </Form.Group>
           )
         } else {
-          field = ( 
+          field = (
             <Form.Group key={id} as={Col}>
               <Form.Label>{label}</Form.Label>
-              <Form.Control
-                ref={register}
-                id={id}
-                type='text'
-                label={label}
-                name={id}
-                isInvalid={errors[id] && !!errors[id]}
-              />
+              <Form.Control {...defaultProps} type='text' />
               <Form.Control.Feedback type='invalid'>
                 {errors[id] && errors[id].message && errors[id].message}
               </Form.Control.Feedback>
@@ -147,12 +146,21 @@ export const Passo1 = () => {
       fieldsRow.push(field)
 
       if (idx % 2) {
-        form.push(renderRow(fieldsRow.map(field => field), id))
+        form.push(
+          renderRow(
+            fieldsRow.map((field) => field),
+            id
+          )
+        )
         fieldsRow = []
       } else if (idx === inputs.length - 1) {
-        form.push(renderRow(fieldsRow.map(field => field), id))
+        form.push(
+          renderRow(
+            fieldsRow.map((field) => field),
+            id
+          )
+        )
       }
-
     })
 
     return form
@@ -176,8 +184,7 @@ export const Passo1 = () => {
           </p>
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
-
-          { renderForms(inputs) }
+          {renderForms(inputs)}
 
           <Row>
             <Form.Group as={Col}>
