@@ -37,7 +37,8 @@ export const Passo1 = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data) => {
+  const onSubmit = (event, data) => {
+    console.log('event', event);
     console.log('data', data)
     history.push('./passo2')
     setValues(data)
@@ -60,9 +61,9 @@ export const Passo1 = () => {
             de 3 minutos!
           </p>
         </div>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Row>
-            <Col>
+            <Form.Group as={Col}>
               <Form.Label>Nome Completo</Form.Label>
               <Form.Control
                 ref={register}
@@ -70,11 +71,12 @@ export const Passo1 = () => {
                 type='text'
                 label='Nome Completo'
                 name='fullName'
+                isInvalid={!!errors?.fullName}
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.fullName?.message}
-              </Form.Label>
-            </Col>
+              </Form.Control.Feedback>
+            </Form.Group>
             <Col>
               <Form.Label>E-mail</Form.Label>
               <Form.Control
@@ -84,9 +86,9 @@ export const Passo1 = () => {
                 label='email'
                 name='email'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.email?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
           </Row>
 
@@ -100,9 +102,9 @@ export const Passo1 = () => {
                 label='cpf'
                 name='cpf'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.cpf?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
 
             <Col>
@@ -114,9 +116,9 @@ export const Passo1 = () => {
                 label='Data de nascimento'
                 name='dob'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.dob?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
           </Row>
 
@@ -130,9 +132,9 @@ export const Passo1 = () => {
                 label='Número de celular'
                 name='cel'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.cel?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
             <Col>
               <Form.Label>CEP</Form.Label>
@@ -143,9 +145,9 @@ export const Passo1 = () => {
                 label='CEP'
                 name='cep'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.cep?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
           </Row>
 
@@ -177,9 +179,9 @@ export const Passo1 = () => {
                 </option>
                 <option value='RENDA_MAIOR_5000'>Acima de R$ 5.000</option>
               </Form.Control>
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.incomeBracket?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
 
             <Col>
@@ -209,9 +211,9 @@ export const Passo1 = () => {
                 </option>
                 <option value='DESEMPREGADO'>Desempregado</option>
               </Form.Control>
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.job?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
           </Row>
 
@@ -225,9 +227,9 @@ export const Passo1 = () => {
                 label='password'
                 name='password'
               />
-              <Form.Label className='helper-text'>
+              <Form.Control.Feedback type='invalid'>
                 {errors?.password?.message}
-              </Form.Label>
+              </Form.Control.Feedback>
             </Col>
           </Row>
 
