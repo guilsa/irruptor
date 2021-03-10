@@ -44,6 +44,25 @@ export const Passo1 = () => {
     setValues(data)
   }
 
+  const incomeOptions = [
+    { value: 'RENDA_MENOR_1000', label: 'Até R$ 1.000' },
+    { value: 'RENDA_MENOR_2000', label: 'De R$ 1.000 até R$ 2.000' },
+    { value: 'RENDA_MENOR_3000', label: 'De R$ 2.000 até R$ 3.000' },
+    { value: 'RENDA_MENOR_4000', label: 'De R$ 3.000 até R$ 4.000' },
+    { value: 'RENDA_MENOR_5000', label: 'De R$ 4.000 até R$ 5.000' },
+    { value: 'RENDA_MAIOR_5000', label: 'Acima de R$ 5.000' },
+  ]
+
+  const jobOptions = [
+    { value: 'APOSENTADO_PENSIONISTA', label: 'Aposentado ou Pensionista' },
+    { value: 'AUTONOMO', label: 'Autônomo' },
+    { value: 'EMPRESARIO', label: 'Empresário ou Empregador' },
+    { value: 'PROFISSIONAL_LIBERAL', label: 'Profissional Liberal' },
+    { value: 'ASSALARIADO', label: 'Funcionário com carteira assinada (CLT)' },
+    { value: 'FUNCIONARIO_PUBLICO', label: 'Funcionário Público ou Militar' },
+    { value: 'DESEMPREGADO', label: 'Desempregado' },
+  ]
+
   const inputs = [
     { label: 'Nome Completo', id: 'full_name' },
     { label: 'E-mail', id: 'email' },
@@ -51,8 +70,16 @@ export const Passo1 = () => {
     { label: 'Data de Nascimento', id: 'dob' },
     { label: 'Número de celular', id: 'cel' },
     { label: 'CEP', id: 'cep' },
-    { label: 'De quanto é a sua renda?', id: 'income_bracket' },
-    { label: 'Trabalha como', id: 'job' },
+    { 
+      label: 'De quanto é a sua renda?', 
+      id: 'income_bracket', 
+      selectOptions: incomeOptions,
+    },
+    { 
+      label: 'Trabalha como',
+      id: 'job',
+      selectOptions: jobOptions,
+    },
     // { id: 'demo', component: () => <div>I'm a div!</div> },
   ]
 
@@ -67,25 +94,52 @@ export const Passo1 = () => {
       let field
 
       if (id === undefined)
-        console.warn('This field needs an id.')
+        console.warn('Oops! Found a field without an id! Check the inputs variable.')
 
       if (label !== undefined) {
-        field = ( 
-          <Form.Group key={id} as={Col}>
-            <Form.Label>{label}</Form.Label>
-            <Form.Control
-              ref={register}
-              id={id}
-              type={input.type === undefined ? 'text' : input.type}
-              label={label}
-              name={id}
-              isInvalid={errors[id] && !!errors[id]}
-            />
-            <Form.Control.Feedback type='invalid'>
-              {errors[id] && errors[id].message && errors[id].message}
-            </Form.Control.Feedback>
-          </Form.Group>
-        )
+        if (input.selectOptions) {
+          field = ( 
+            <Form.Group key={id} as={Col}>
+              <Form.Label>{label}</Form.Label>
+              <Form.Control
+                as='select'
+                ref={register}
+                className='select optional valid'
+                id={id}
+                label={label}
+                name={id}
+                isInvalid={errors[id] && !!errors[id]}
+              >
+              <option>Selecione</option>
+              {
+                input.selectOptions.map(select => {
+                  return <option value={select.value}>{select.label}</option>
+                })
+              }
+              </Form.Control>
+              <Form.Control.Feedback type='invalid'>
+                {errors[id] && errors[id].message && errors[id].message}
+              </Form.Control.Feedback>
+            </Form.Group>
+          )
+        } else {
+          field = ( 
+            <Form.Group key={id} as={Col}>
+              <Form.Label>{label}</Form.Label>
+              <Form.Control
+                ref={register}
+                id={id}
+                type='text'
+                label={label}
+                name={id}
+                isInvalid={errors[id] && !!errors[id]}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {errors[id] && errors[id].message && errors[id].message}
+              </Form.Control.Feedback>
+            </Form.Group>
+          )
+        }
       } else {
         field = React.createElement(input.component, { key: id })
       }

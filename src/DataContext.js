@@ -10,7 +10,7 @@ export const DataProvider = ({ children }) => {
     dob: '15/09/1983',
     cel: '(85) 11934-9722',
     cep: '24904-495',
-    income_bracket: '$2000',
+    income_bracket: 'RENDA_MENOR_2000',
     job: 'EMPRESARIO',
     password: 'foobar123',
     mother_full_name: 'mae',
