@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
     income_bracket: 'RENDA_MENOR_2000',
     job: 'EMPRESARIO',
     password: 'foobar123',
-    mother_full_name: 'mae',
+    mother_full_name: 'Fátima Bernardes',
     gender: 'MALE',
     birth_state: 'AL',
     birth_city: 'Selecione',

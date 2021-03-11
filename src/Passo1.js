@@ -4,9 +4,10 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { incomes, jobs } from './static/selectInputOptions'
-
 import { Button, Row, Col, Form } from 'react-bootstrap'
+
+import { incomes, jobs } from './static/selectInputOptions'
+import { parseSelectOptions } from './utils/utils'
 
 const schema = yup.object().shape({
   full_name: yup
@@ -43,17 +44,6 @@ export const Passo1 = () => {
     console.log('data', data)
     history.push('./passo2')
     setValues(data)
-  }
-
-  const parseSelectOptions = (options) => {
-    const array = []
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(options, 'text/html')
-    const elements = doc.getElementsByTagName('option')
-    for (const el of elements) {
-      array.push({ value: el.value, label: el.text })
-    }
-    return array
   }
 
   const jobOptions = parseSelectOptions(jobs)
