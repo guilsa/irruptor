@@ -15,7 +15,8 @@ import {
   loanIntents,
   bankNames,
 } from './static/selectInputOptions'
-import { parseSelectOptions } from './utils/utils'
+import { parseSelectOptions, getCitiesSelect } from './utils/utils'
+import citiesToState from './static/citiesToState'
 
 const schema = yup.object().shape({
   mother_full_name: yup
@@ -28,7 +29,7 @@ const schema = yup.object().shape({
 export const Passo2 = () => {
   const { setValues, data } = useData()
   const history = useHistory()
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, watch, errors } = useForm({
     defaultValues: {
       mother_full_name: data.mother_full_name,
       gender: data.gender,
@@ -50,12 +51,18 @@ export const Passo2 = () => {
     resolver: yupResolver(schema),
   })
 
+  const watchBirthState = watch('birth_state')
+  const watchBirthCity = watch('birth_city')
+
+  console.log('watchBirthCity', watchBirthCity)
+
   const onSubmit = (data) => {
     console.log('data', data)
     history.push('./passo3')
     setValues(data)
   }
 
+  // Parse from html string literal hack
   const statesSelect = parseSelectOptions(states)
   const degreesSelect = parseSelectOptions(degrees)
   const maritalStatusesSelect = parseSelectOptions(maritalStatuses)
@@ -63,6 +70,10 @@ export const Passo2 = () => {
   const idIssuersSelect = parseSelectOptions(idIssuers)
   const bankNamesSelect = parseSelectOptions(bankNames)
   const loanIntentsSelect = parseSelectOptions(loanIntents)
+  
+  // Similar to above
+  // Fills select options from context depending on other select field
+  const birthCitiesSelect = getCitiesSelect(citiesToState, watchBirthState)
 
   const hardCoded_gendersSelect = [
     { value: 'FEMALE', label: 'Feminino' },
@@ -77,51 +88,19 @@ export const Passo2 = () => {
   const inputs = [
     { label: 'Nome completo da mãe', id: 'mother_full_name' },
     { label: 'Gênero', id: 'gender', selectOptions: hardCoded_gendersSelect },
-    {
-      label: 'Nascido em qual estado',
-      id: 'birth_state',
-      selectOptions: statesSelect,
-    },
-    { label: 'Nascido em qual cidade', id: 'birth_city' },
+    { label: 'Nascido em qual estado', id: 'birth_state', selectOptions: statesSelect },
+    { label: 'Nascido em qual cidade', id: 'birth_city', selectOptions: birthCitiesSelect },
     { label: 'Escolaridade', id: 'degree', selectOptions: degreesSelect },
-    {
-      label: 'Estado civil',
-      id: 'marital_status',
-      selectOptions: maritalStatusesSelect,
-    },
-    {
-      label: 'Documento de identidade',
-      id: 'id_type',
-      selectOptions: idTypesSelect,
-    },
+    { label: 'Estado civil', id: 'marital_status', selectOptions: maritalStatusesSelect },
+    { label: 'Documento de identidade', id: 'id_type', selectOptions: idTypesSelect },
     { label: 'Número do documento', id: 'id_num' },
-    {
-      label: 'Emissor do documento',
-      id: 'id_issuer',
-      selectOptions: idIssuersSelect,
-    },
-    {
-      label: 'UF do documento',
-      id: 'id_issuer_state',
-      selectOptions: statesSelect,
-    },
+    { label: 'Emissor do documento', id: 'id_issuer', selectOptions: idIssuersSelect },
+    { label: 'UF do documento', id: 'id_issuer_state', selectOptions: statesSelect },
     { label: 'Data de expedição do documento', id: 'id_exp' },
-    {
-      label: 'Selecione seu Banco',
-      id: 'bank_name',
-      selectOptions: bankNamesSelect,
-    },
-    {
-      label: 'Tipo de conta',
-      id: 'bank_account_type',
-      selectOptions: hardCoded_AccountTypeSelect,
-    },
+    { label: 'Selecione seu Banco', id: 'bank_name', selectOptions: bankNamesSelect },
+    { label: 'Tipo de conta', id: 'bank_account_type', selectOptions: hardCoded_AccountTypeSelect },
     { label: 'Número da agência sem o dígito', id: 'bank_account_num' },
-    {
-      label: 'Objetivo do crédito',
-      id: 'loan_intent',
-      selectOptions: loanIntentsSelect,
-    },
+    { label: 'Objetivo do crédito', id: 'loan_intent', selectOptions: loanIntentsSelect },
     // { id: 'demo', component: () => <div>I'm a div!</div> },
   ]
 
@@ -141,23 +120,20 @@ export const Passo2 = () => {
       }
       let field
 
-      if (id === undefined)
-        console.warn(
-          'Oops! Found a field without an id! Check the inputs variable.'
-        )
+      if (id === undefined) console.warn('Oops! Found a field without an id! Check the inputs variable.')
+
+      // Input type cases: (a) select (b) text (c) React.Component
 
       if (label !== undefined) {
         if (input.selectOptions) {
+          const selectOptions = input.selectOptions
+
           field = (
             <Form.Group key={id} as={Col}>
               <Form.Label>{label}</Form.Label>
-              <Form.Control
-                {...defaultProps}
-                as='select'
-                className='select optional valid'
-              >
+              <Form.Control {...defaultProps} as='select' className='select optional valid'>
                 <option>Selecione</option>
-                {input.selectOptions.map((select) => {
+                {selectOptions.map((select) => {
                   return (
                     <option key={select.value} value={select.value}>
                       {select.label}

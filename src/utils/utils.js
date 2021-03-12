@@ -9,6 +9,18 @@ const parseSelectOptions = (options) => {
   return array
 }
 
+const getCitiesSelect = (citiesToStateMapping, selectedState) => {
+  try {
+    let cities = citiesToStateMapping[selectedState]
+    return cities.map(city => {
+      return { value: city, label: city }
+    })
+  } catch {
+    console.warn('Incorrect selectedState value passed to getCitiesSelect.')
+  }
+}
+
 export {
-  parseSelectOptions
+  parseSelectOptions,
+  getCitiesSelect,
 }
