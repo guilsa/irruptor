@@ -6,9 +6,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { Button, Row, Col, Form } from 'react-bootstrap'
 
-import { 
-  states, degrees, maritalStatuses, idTypes, idIssuers, 
-  loanIntents, bankNames 
+import {
+  states,
+  degrees,
+  maritalStatuses,
+  idTypes,
+  idIssuers,
+  loanIntents,
+  bankNames,
 } from './static/selectInputOptions'
 import { parseSelectOptions } from './utils/utils'
 
@@ -17,9 +22,7 @@ const schema = yup.object().shape({
     .string()
     .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
     .required('Esse campo é necessário'),
-    gender: yup
-    .string()
-    .required('Esse campo é necessário'),
+  gender: yup.string().required('Esse campo é necessário'),
 })
 
 export const Passo2 = () => {
@@ -70,23 +73,55 @@ export const Passo2 = () => {
     { value: 'CONTA_CORRENTE_INDIVIDUAL', label: 'Conta Corrente' },
     { value: 'CONTA_POUPANCA_INDIVIDUAL', label: 'Conta Poupança' },
   ]
-  
+
   const inputs = [
     { label: 'Nome completo da mãe', id: 'mother_full_name' },
     { label: 'Gênero', id: 'gender', selectOptions: hardCoded_gendersSelect },
-    { label: 'Nascido em qual estado', id: 'birth_state', selectOptions: statesSelect },
+    {
+      label: 'Nascido em qual estado',
+      id: 'birth_state',
+      selectOptions: statesSelect,
+    },
     { label: 'Nascido em qual cidade', id: 'birth_city' },
     { label: 'Escolaridade', id: 'degree', selectOptions: degreesSelect },
-    { label: 'Estado civil', id: 'marital_status', selectOptions: maritalStatusesSelect },
-    { label: 'Documento de identidade', id: 'id_type', selectOptions: idTypesSelect },
+    {
+      label: 'Estado civil',
+      id: 'marital_status',
+      selectOptions: maritalStatusesSelect,
+    },
+    {
+      label: 'Documento de identidade',
+      id: 'id_type',
+      selectOptions: idTypesSelect,
+    },
     { label: 'Número do documento', id: 'id_num' },
-    { label: 'Emissor do documento', id: 'id_issuer', selectOptions: idIssuersSelect },
-    { label: 'UF do documento', id: 'id_issuer_state', selectOptions: statesSelect },
+    {
+      label: 'Emissor do documento',
+      id: 'id_issuer',
+      selectOptions: idIssuersSelect,
+    },
+    {
+      label: 'UF do documento',
+      id: 'id_issuer_state',
+      selectOptions: statesSelect,
+    },
     { label: 'Data de expedição do documento', id: 'id_exp' },
-    { label: 'Selecione seu Banco', id: 'bank_name', selectOptions: bankNamesSelect },
-    { label: 'Tipo de conta', id: 'bank_account_type', selectOptions: hardCoded_AccountTypeSelect },
+    {
+      label: 'Selecione seu Banco',
+      id: 'bank_name',
+      selectOptions: bankNamesSelect,
+    },
+    {
+      label: 'Tipo de conta',
+      id: 'bank_account_type',
+      selectOptions: hardCoded_AccountTypeSelect,
+    },
     { label: 'Número da agência sem o dígito', id: 'bank_account_num' },
-    { label: 'Objetivo do crédito', id: 'loan_intent', selectOptions: loanIntentsSelect },
+    {
+      label: 'Objetivo do crédito',
+      id: 'loan_intent',
+      selectOptions: loanIntentsSelect,
+    },
     // { id: 'demo', component: () => <div>I'm a div!</div> },
   ]
 
@@ -185,9 +220,7 @@ export const Passo2 = () => {
             height='57'
           />
           <h2>Seu novo crédito, mais próximo!</h2>
-          <p className='lead'>
-          Precisamos atender você da melhor maneira.
-          </p>
+          <p className='lead'>Precisamos atender você da melhor maneira.</p>
           Só precisamos de mais algumas informações.
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
