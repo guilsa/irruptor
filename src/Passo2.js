@@ -4,7 +4,7 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { Container, Row, Button, Col, Form } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
 
 import { PageContainer } from './components/PageContainer'
 
@@ -17,7 +17,7 @@ import {
   loanIntents,
   bankNames,
 } from './static/selectInputOptions'
-import { parseSelectOptions, getCitiesSelect } from './utils/utils'
+import { parseSelectOptions, getCitiesSelect, renderForms } from './utils/utils'
 import citiesToState from './static/citiesToState'
 
 const schema = yup.object().shape({
@@ -103,86 +103,6 @@ export const Passo2 = () => {
     // { id: 'demo', component: () => <div>I'm a div!</div> },
   ]
 
-  const renderForms = (inputs) => {
-    const form = []
-    let fieldsRow = []
-    const renderRow = (props, id) => <Row key={id}>{props}</Row>
-
-    inputs.forEach((input, idx) => {
-      const { label, id } = input
-      const defaultProps = {
-        ref: register,
-        id: id,
-        label: label,
-        name: id,
-        isInvalid: errors[id] && !!errors[id],
-      }
-      let field
-
-      if (id === undefined) console.warn('Oops! Found a field without an id! Check the inputs variable.')
-
-      // Input type cases: (a) select (b) text (c) React.Component
-
-      if (label !== undefined) {
-        if (input.selectOptions) {
-          const selectOptions = input.selectOptions
-
-          field = (
-            <Form.Group key={id} as={Col}>
-              <Form.Label>{label}</Form.Label>
-              <Form.Control {...defaultProps} as='select' className='select optional valid'>
-                <option>Selecione</option>
-                {selectOptions.map((select) => {
-                  return (
-                    <option key={select.value} value={select.value}>
-                      {select.label}
-                    </option>
-                  )
-                })}
-              </Form.Control>
-              <Form.Control.Feedback type='invalid'>
-                {errors[id] && errors[id].message && errors[id].message}
-              </Form.Control.Feedback>
-            </Form.Group>
-          )
-        } else {
-          field = (
-            <Form.Group key={id} as={Col}>
-              <Form.Label>{label}</Form.Label>
-              <Form.Control {...defaultProps} type='text' />
-              <Form.Control.Feedback type='invalid'>
-                {errors[id] && errors[id].message && errors[id].message}
-              </Form.Control.Feedback>
-            </Form.Group>
-          )
-        }
-      } else {
-        field = React.createElement(input.component, { key: id })
-      }
-
-      fieldsRow.push(field)
-
-      if (idx % 2) {
-        form.push(
-          renderRow(
-            fieldsRow.map((field) => field),
-            id
-          )
-        )
-        fieldsRow = []
-      } else if (idx === inputs.length - 1) {
-        form.push(
-          renderRow(
-            fieldsRow.map((field) => field),
-            id
-          )
-        )
-      }
-    })
-
-    return form
-  }
-
   return (
     <Container>
       <PageContainer>
@@ -191,7 +111,7 @@ export const Passo2 = () => {
           <p className='lead'>Precisamos de mais algumas informações.</p>
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
-          {renderForms(inputs)}
+          {renderForms(inputs, register, errors)}
           <hr className='my-4' />
           <Button variant='success' size='lg' type='submit' block>
             Concluir

@@ -9,7 +9,7 @@ import { Container, Button, Row, Col, Form } from 'react-bootstrap'
 import { PageContainer } from './components/PageContainer'
 
 import { incomes, jobs } from './static/selectInputOptions'
-import { parseSelectOptions } from './utils/utils'
+import { parseSelectOptions, renderForms } from './utils/utils'
 
 const schema = yup.object().shape({
   full_name: yup
@@ -41,7 +41,7 @@ export const Passo1 = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (event, data) => {
+  const onSubmit = (data) => {
     console.log('data', data)
     history.push('./passo2')
     setValues(data)
@@ -74,82 +74,6 @@ export const Passo1 = () => {
     // { id: 'demo', component: () => <div>I'm a div!</div> },
   ]
 
-  const renderForms = (inputs) => {
-    const form = []
-    let fieldsRow = []
-    const renderRow = (props, id) => <Row key={id}>{props}</Row>
-
-    inputs.forEach((input, idx) => {
-      const { label, id } = input
-      const defaultProps = {
-        ref: register,
-        id: id,
-        label: label,
-        name: id,
-        isInvalid: errors[id] && !!errors[id],
-      }
-      let field
-
-      if (id === undefined) console.warn('Oops! Found a field without an id! Check the inputs variable.')
-
-      if (label !== undefined) {
-        if (input.selectOptions) {
-          field = (
-            <Form.Group key={id} as={Col}>
-              <Form.Label>{label}</Form.Label>
-              <Form.Control {...defaultProps} as='select' className='select optional valid'>
-                <option>Selecione</option>
-                {input.selectOptions.map((select) => {
-                  return (
-                    <option key={select.value} value={select.value}>
-                      {select.label}
-                    </option>
-                  )
-                })}
-              </Form.Control>
-              <Form.Control.Feedback type='invalid'>
-                {errors[id] && errors[id].message && errors[id].message}
-              </Form.Control.Feedback>
-            </Form.Group>
-          )
-        } else {
-          field = (
-            <Form.Group key={id} as={Col}>
-              <Form.Label>{label}</Form.Label>
-              <Form.Control {...defaultProps} type='text' />
-              <Form.Control.Feedback type='invalid'>
-                {errors[id] && errors[id].message && errors[id].message}
-              </Form.Control.Feedback>
-            </Form.Group>
-          )
-        }
-      } else {
-        field = React.createElement(input.component, { key: id })
-      }
-
-      fieldsRow.push(field)
-
-      if (idx % 2) {
-        form.push(
-          renderRow(
-            fieldsRow.map((field) => field),
-            id
-          )
-        )
-        fieldsRow = []
-      } else if (idx === inputs.length - 1) {
-        form.push(
-          renderRow(
-            fieldsRow.map((field) => field),
-            id
-          )
-        )
-      }
-    })
-
-    return form
-  }
-
   return (
     <Container>
       <PageContainer>
@@ -160,7 +84,7 @@ export const Passo1 = () => {
           </p>
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
-          {renderForms(inputs)}
+          {renderForms(inputs, register, errors)}
 
           <Row>
             <Form.Group as={Col}>
