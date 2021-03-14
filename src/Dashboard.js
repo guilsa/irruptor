@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, CardDeck, Button, Badge } from 'react-bootstrap'
 
 export const Dashboard = () => {
-
   const CustomHeader = (props) => (
     <section className='text-center container'>
       <div className='row py-lg-4'>
@@ -62,7 +61,7 @@ export const Dashboard = () => {
 
   const NovaProposta = (props) => (
     <Container>
-      <CustomHeader title={props.title} text='Em dias, consiga empréstimos para imóveis ou automóveis.' />
+      <CustomHeader title={props.title} text='Em apénas alguns dias, consiga empréstimos para imóveis ou automóveis.' />
       <Row className='justify-content-md-center'>
         <CardDeck>
           <Card className='text-center'>
@@ -70,7 +69,7 @@ export const Dashboard = () => {
               <Badge variant='dark'>{props.date}</Badge>
               <Card.Text>{props.text}</Card.Text>
               <Link to='/passo'>
-                <Button variant='success'>Solicitar Novo Empréstimo</Button>
+                <Button variant='success'>Solicitar um novo empréstimo</Button>
               </Link>
             </Card.Body>
           </Card>
@@ -91,18 +90,18 @@ export const Dashboard = () => {
             status='new'
           />
           <Proposta
-            title='Pré-Aprovadas'
+            title='Pré-Aprovado'
             text='Conseguimos as seguintes ofertas pré-aprovadas. Você está mais perto do seu emprestimo!'
             status='pre_approved'
           />
           <Proposta
-            title='Pendentes'
+            title='Pendente'
             text='Suas propostas estão pendentes. Estamos arguarando informações do nosso parceiro, iremos conseguir
           tirar os itens abaixo de pendente para confirmado. Entraremos em contato com voce!'
             status='pending'
           />
           <Proposta
-            title='Reprovadas'
+            title='Recusado'
             text='Chato, mas infelizmente algumas propostas foram reprovadas.'
             status='declined'
           />
