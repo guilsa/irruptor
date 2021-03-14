@@ -57,7 +57,7 @@ export const Passo2 = () => {
 
   const onSubmit = (data) => {
     console.log('data', data)
-    history.push('./passo3')
+    history.push('./sucesso')
     setValues(data)
   }
 

@@ -23,7 +23,9 @@ function App() {
             />
             <Navbar.Brand href='#'>Credijá</Navbar.Brand>
             <Nav className='mr-auto'>
-              <Nav.Link href='#conta'>Minha Conta</Nav.Link>
+              <Nav.Link href=''>Perfil</Nav.Link>
+              <Nav.Link href=''>Conta</Nav.Link>
+              <Nav.Link href=''>Ajuda</Nav.Link>
             </Nav>
           </Navbar>
         </Container>
@@ -32,7 +34,7 @@ function App() {
             <Route exact path='/' component={Dashboard} />
             <Route path='/passo' component={Passo1} />
             <Route path='/passo2' component={Passo2} />
-            <Route path='/passo3' component={Passo3} />
+            <Route path='/sucesso' component={Passo3} />
             <Route path='/dash' component={Dashboard} />
             <Route path='/resultados' component={Results} />
           </Switch>

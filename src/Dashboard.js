@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, CardDeck, Button, Badge } from 'react-bootstrap'
 
 export const Dashboard = () => {
+
   const CustomHeader = (props) => (
     <section className='text-center container'>
       <div className='row py-lg-4'>

@@ -1,67 +1,61 @@
 import React from 'react'
-// import { useHistory } from 'react-router-dom'
-import { useData } from './DataContext'
-import { useForm } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
-// import * as yup from 'yup'
-import steps from './images/passo-3.jpg'
-
-// const schema = yup.object().shape({
-//   fullName: yup
-//     .string()
-//     .matches(/^([^0-9]*)$/, 'Nome não pode ter números')
-//     .required('Esse campo é necessário'),
-//   email: yup
-//     .string()
-//     // .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
-//     .required('Esse campo é necessário'),
-// })
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap'
 
 export const Passo3 = () => {
-  const { data } = useData()
-  // const history = useHistory()
-  const { handleSubmit } = useForm({
-    defaultValues: {
-      mother_full_name: data.mother_full_name,
-      gender: data.gender,
-      birth_state: data.birth_state,
-      birth_city: data.birth_city,
-      degree: data.degree,
-      marital_status: data.marital_status,
-      id_type: data.id_typ,
-      id_num: data.id_num,
-      id_issuer: data.id_issuer,
-      id_issuer_state: data.id_issuer_state,
-      id_exp: data.id_exp,
-      bank_name: data.bank_name,
-      bank_account_type: data.bank_account_type,
-      bank_account_num: data.bank_account_num,
-      loan_intent: data.loan_intent,
-    },
-    mode: 'onBlur',
-    // resolver: yupResolver(schema),
-  })
-
-  const onSubmit = (data) => {
-    console.log('hi');
-    // history.push('/')
-    // setValues(data)
-  }
+  const CustomHeader = (props) => (
+    <section className='text-center container'>
+      <div className='row py-lg-4'>
+        <div className='col-lg-10 mx-auto'>
+          <h1 className='fw-light'>{props.title}</h1>
+          <p className='lead text-muted'>{props.text}</p>
+        </div>
+      </div>
+    </section>
+  )
+  const NovaProposta = (props) => (
+    <Container className='text-center'>
+      <CustomHeader title={props.title} text='Por favor aguarde até completarmos a pré-análise.' />
+      <Alert variant='success'>
+        <Alert.Heading>O que é a pré-análise?</Alert.Heading>
+        <p>
+          Seu nome, endereço, CPF e outras informações foram enviadas de forma segura para o nosso parceiro
+          Creditas. A Creditas é uma plataforma digital que atua como correspondente Bancário e Sociedade de
+          Crédito Direto para facilitar o processo de contratação de empréstimos.
+        </p>
+        <hr />
+        <Alert.Heading>Quanto tempo demora?</Alert.Heading>
+        <p>O processo normalmente leva alguns dias.</p>
+        <p>
+          Na página do <a href='/#'>Perfil</a>, você pode monitorar essa e outras solicitações.
+        </p>
+        <hr />
+        <Alert.Heading>Tenho mais dúvidas.</Alert.Heading>
+        <p className='mb-0'>
+          Estamos disponíveis para te ajudar de Segunda-Sexta, 10am-17pm. Mais informações em{' '}
+          <a href='/#'>Ajuda</a>.
+        </p>
+      </Alert>
+      <div className='row py-lg-4'>
+        <div className='col-lg-10 mx-auto'>
+          <p className='lead text-muted'></p>
+        </div>
+      </div>
+      <Link to='/'>
+        <Button size='lg' variant='success'>
+          Ir para o meu perfil
+        </Button>
+      </Link>
+    </Container>
+  )
 
   return (
-    <div>
-      <h2 style={{ textAlign: 'center', marginBottom: 30 }}>
-        Você chegou no último passo!
-        <br />
-        <img
-          style={{ marginTop: 30, width: 445, height: 79 }}
-          src={steps}
-          alt='Steps'
-        />
-      </h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <button disabled>Completar</button>
-      </form>
-    </div>
+    <Container fluid className='py-5'>
+      <Row>
+        <Col>
+          <NovaProposta title='Sua solicitação foi recebida com sucesso.' status='new' />
+        </Col>
+      </Row>
+    </Container>
   )
 }
