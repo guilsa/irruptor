@@ -4,7 +4,9 @@ import { useData } from './DataContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { Button, Row, Col, Form } from 'react-bootstrap'
+import { Container, Row, Button, Col, Form } from 'react-bootstrap'
+
+import { PageContainer } from './components/PageContainer'
 
 import {
   states,
@@ -52,9 +54,6 @@ export const Passo2 = () => {
   })
 
   const watchBirthState = watch('birth_state')
-  const watchBirthCity = watch('birth_city')
-
-  console.log('watchBirthCity', watchBirthCity)
 
   const onSubmit = (data) => {
     console.log('data', data)
@@ -70,7 +69,7 @@ export const Passo2 = () => {
   const idIssuersSelect = parseSelectOptions(idIssuers)
   const bankNamesSelect = parseSelectOptions(bankNames)
   const loanIntentsSelect = parseSelectOptions(loanIntents)
-  
+
   // Similar to above
   // Fills select options from context depending on other select field
   const birthCitiesSelect = getCitiesSelect(citiesToState, watchBirthState)
@@ -185,43 +184,20 @@ export const Passo2 = () => {
   }
 
   return (
-    <div>
-      <main>
+    <Container>
+      <PageContainer>
         <div className='py-5 text-center'>
-          <img
-            className='d-block mx-auto mb-4'
-            src='https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg'
-            alt=''
-            width='72'
-            height='57'
-          />
-          <h2>Seu novo crédito, mais próximo!</h2>
-          <p className='lead'>Precisamos atender você da melhor maneira.</p>
-          Só precisamos de mais algumas informações.
+          <h2>O seu novo crédito está mais próximo!</h2>
+          <p className='lead'>Precisamos de mais algumas informações.</p>
         </div>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           {renderForms(inputs)}
           <hr className='my-4' />
           <Button variant='success' size='lg' type='submit' block>
-            Próximo
+            Concluir
           </Button>
         </Form>
-      </main>
-
-      <footer className='my-5 pt-5 text-muted text-center text-small'>
-        <p className='mb-1'>&copy; 2121–2021 Credijá</p>
-        <ul className='list-inline'>
-          <li className='list-inline-item'>
-            <a href='/privacidade'>Privacidade</a>
-          </li>
-          <li className='list-inline-item'>
-            <a href='/termos'>Termos</a>
-          </li>
-          <li className='list-inline-item'>
-            <a href='/suporte'>Suporte</a>
-          </li>
-        </ul>
-      </footer>
-    </div>
+      </PageContainer>
+    </Container>
   )
 }

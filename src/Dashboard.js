@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, CardDeck, Button, Badge } from 'react-bootstrap'
 
 export const Dashboard = () => {
@@ -20,16 +21,8 @@ export const Dashboard = () => {
         <Card.Subtitle className='mb-1 text-muted'>{props.price}</Card.Subtitle>
         <Badge variant='dark'>{props.date}</Badge>
         <Card.Text>{props.text}</Card.Text>
-        {
-          props.status === 'pre_approved' && (
-            <Button variant='primary'>Continuar</Button>
-          )
-        }
-        {
-          props.status === 'pending' && (
-            <Button variant='info'>Mais</Button>
-          )
-        }
+        {props.status === 'pre_approved' && <Button variant='primary'>Continuar</Button>}
+        {props.status === 'pending' && <Button variant='info'>Mais</Button>}
       </Card.Body>
     </Card>
   )
@@ -68,17 +61,16 @@ export const Dashboard = () => {
 
   const NovaProposta = (props) => (
     <Container>
-      <CustomHeader
-        title={props.title}
-        text='Em dias, consiga empréstimos para imóveis ou automóveis.'
-      />
+      <CustomHeader title={props.title} text='Em dias, consiga empréstimos para imóveis ou automóveis.' />
       <Row className='justify-content-md-center'>
         <CardDeck>
           <Card className='text-center'>
             <Card.Body>
               <Badge variant='dark'>{props.date}</Badge>
               <Card.Text>{props.text}</Card.Text>
-              <Button variant='success'>Solicitar Novo Empréstimo</Button>
+              <Link to='/passo'>
+                <Button variant='success'>Solicitar Novo Empréstimo</Button>
+              </Link>
             </Card.Body>
           </Card>
         </CardDeck>
@@ -115,20 +107,6 @@ export const Dashboard = () => {
           />
         </Col>
       </Row>
-      <footer className='my-5 pt-5 text-muted text-center text-small'>
-        <p className='mb-1'>&copy; 2121–2021 Credijá</p>
-        <ul className='list-inline'>
-          <li className='list-inline-item'>
-            <a href='/privacidade'>Privacidade</a>
-          </li>
-          <li className='list-inline-item'>
-            <a href='/termos'>Termos</a>
-          </li>
-          <li className='list-inline-item'>
-            <a href='/suporte'>Suporte</a>
-          </li>
-        </ul>
-      </footer>
     </Container>
   )
 }

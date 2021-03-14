@@ -5,6 +5,7 @@ import { Passo2 } from './Passo2'
 import { Passo3 } from './Passo3'
 import { Dashboard } from './Dashboard'
 import { Results } from './Results'
+import { Footer } from './components/Footer'
 
 import { Container, Navbar, Nav } from 'react-bootstrap'
 
@@ -28,13 +29,15 @@ function App() {
         </Container>
         <Router>
           <Switch>
-            <Route exact path='/' component={Passo1} />
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/passo' component={Passo1} />
             <Route path='/passo2' component={Passo2} />
             <Route path='/passo3' component={Passo3} />
             <Route path='/dash' component={Dashboard} />
             <Route path='/resultados' component={Results} />
           </Switch>
         </Router>
+        <Footer/>
       </Container>
     </>
   )
