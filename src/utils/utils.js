@@ -22,7 +22,7 @@ const renderForms = (inputs, register, errors) => {
     if (label !== undefined) {
       if (input.selectOptions) {
         field = (
-          <Form.Group key={id} as={Col}>
+          <Form.Group key={id} as={Col} sm={12} md={6}>
             <Form.Label>{label}</Form.Label>
             <Form.Control {...defaultProps} as='select' className='select optional valid'>
               <option>Selecione</option>
@@ -41,7 +41,7 @@ const renderForms = (inputs, register, errors) => {
         )
       } else {
         field = (
-          <Form.Group key={id} as={Col}>
+          <Form.Group key={id} as={Col} sm={12} md={6}>
             <Form.Label>{label}</Form.Label>
             <Form.Control {...defaultProps} type='text' />
             <Form.Control.Feedback type='invalid'>
