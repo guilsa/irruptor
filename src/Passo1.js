@@ -200,7 +200,7 @@ export const Passo1 = () => {
       </main>
 
       <footer className='my-5 pt-5 text-muted text-center text-small'>
-        <p className='mb-1'>&copy; 2121–2021 Easy Creditos</p>
+        <p className='mb-1'>&copy; 2121–2021 Credijá</p>
         <ul className='list-inline'>
           <li className='list-inline-item'>
             <a href='/privacidade'>Privacidade</a>
