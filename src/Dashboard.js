@@ -30,8 +30,7 @@ export const Dashboard = () => {
   const Proposta = (props) => (
     <Container className='py-4'>
       <CustomHeader title={props.title} text={props.text} />
-      {/* <Card bg='Secondary' className='px-3'><Card.Body></Card.Body></Card> */}
-      <Row className='justify-content-md-center'>
+      <Row>
         <CardDeck>
           <CustomCard
             title='Empréstimo Imóvel'
