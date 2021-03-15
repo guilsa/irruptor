@@ -15,23 +15,25 @@ export const Dashboard = () => {
   )
 
   const CustomCard = (props) => (
-    <Card style={{ width: '20rem' }}>
-      <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Subtitle className='mb-1 text-muted'>{props.price}</Card.Subtitle>
-        <Badge variant='dark'>{props.date}</Badge>
-        <Card.Text>{props.text}</Card.Text>
-        {props.status === 'pre_approved' && <Button variant='primary'>Continuar</Button>}
-        {props.status === 'pending' && <Button variant='info'>Mais</Button>}
-      </Card.Body>
-    </Card>
+    <Col md='6' style={{ padding: 10 }}>
+      <Card style={{ minWidth: '20rem' }}>
+        <Card.Body>
+          <Card.Title>{props.title}</Card.Title>
+          <Card.Subtitle className='mb-1 text-muted'>{props.price}</Card.Subtitle>
+          <Badge variant='dark'>{props.date}</Badge>
+          <Card.Text>{props.text}</Card.Text>
+          {props.status === 'pre_approved' && <Button variant='primary'>Continuar</Button>}
+          {props.status === 'pending' && <Button variant='info'>Mais</Button>}
+        </Card.Body>
+      </Card>
+    </Col>
   )
 
   const Proposta = (props) => (
     <Container className='py-4'>
       <CustomHeader title={props.title} text={props.text} />
       <Row>
-        <CardDeck>
+        <CardDeck style={{ margin: '0 auto' }}>
           <CustomCard
             title='Empréstimo Imóvel'
             price='$2,500'
@@ -60,7 +62,10 @@ export const Dashboard = () => {
 
   const NovaProposta = (props) => (
     <Container>
-      <CustomHeader title={props.title} text='Em apénas alguns dias, consiga empréstimos para imóveis ou automóveis.' />
+      <CustomHeader
+        title={props.title}
+        text='Em apénas alguns dias, consiga empréstimos para imóveis ou automóveis.'
+      />
       <Row className='justify-content-md-center'>
         <CardDeck>
           <Card className='text-center'>
