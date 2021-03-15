@@ -18,9 +18,16 @@ export const Dashboard = () => {
     <Col md='6' style={{ padding: 10 }}>
       <Card style={{ minWidth: '20rem' }}>
         <Card.Body>
-          <Card.Title>{props.title}</Card.Title>
-          <Card.Subtitle className='mb-1 text-muted'>{props.price}</Card.Subtitle>
-          <Badge variant='dark'>{props.date}</Badge>
+        <Row>
+            <Col>
+              <Card.Title>{props.title}</Card.Title>
+              <Card.Subtitle className='mb-1 text-muted'>{props.price}</Card.Subtitle>
+            </Col>
+            <Col xs={4} sm={3} md={4} lg={3}>
+              <Badge variant='light' className='font-weight-normal'>{props.date}</Badge>
+            </Col>
+          </Row>
+          <hr />
           <Card.Text>{props.text}</Card.Text>
           {props.status === 'pre_approved' && <Button variant='primary'>Continuar</Button>}
           {props.status === 'pending' && <Button variant='info'>Mais</Button>}
