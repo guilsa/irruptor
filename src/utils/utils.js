@@ -14,6 +14,7 @@ const renderForms = (inputs, register, errors) => {
       label: label,
       name: id,
       isInvalid: errors[id] && !!errors[id],
+      size: 'lg',
     }
     let field
 
@@ -23,8 +24,8 @@ const renderForms = (inputs, register, errors) => {
       if (input.selectOptions) {
         field = (
           <Form.Group key={id} as={Col} sm={12} md={6}>
-            <Form.Label>{label}</Form.Label>
-            <Form.Control {...defaultProps} as='select' className='select optional valid'>
+            <Form.Label size='lg'>{label}</Form.Label>
+            <Form.Control {...defaultProps} as='select'>
               <option>Selecione</option>
               {input.selectOptions.map((select) => {
                 return (
@@ -42,7 +43,7 @@ const renderForms = (inputs, register, errors) => {
       } else {
         field = (
           <Form.Group key={id} as={Col} sm={12} md={6}>
-            <Form.Label>{label}</Form.Label>
+            <Form.Label size='lg'>{label}</Form.Label>
             <Form.Control {...defaultProps} type='text' />
             <Form.Control.Feedback type='invalid'>
               {errors[id] && errors[id].message && errors[id].message}

@@ -89,7 +89,7 @@ export const Passo1 = () => {
           <Row>
             <Form.Group as={Col}>
               <Form.Label>Criar senha</Form.Label>
-              <Form.Control ref={register} id='password' type='password' label='password' name='password' />
+              <Form.Control ref={register} id='password' type='password' label='password' name='password' size='lg' />
               <Form.Control.Feedback type='invalid'>{errors?.password?.message}</Form.Control.Feedback>
             </Form.Group>
           </Row>
