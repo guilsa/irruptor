@@ -103,7 +103,7 @@ export const Dashboard = () => {
             <Card.Body>
               <Badge variant='dark'>{props.date}</Badge>
               <Card.Text>{props.text}</Card.Text>
-              <Link to='/passo'>
+              <Link to='/emprestimo'>
                 <Button variant='success'>Solicitar um novo empréstimo</Button>
               </Link>
             </Card.Body>

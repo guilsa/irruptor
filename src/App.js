@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { LoanSelect } from './LoanSelect'
 import { Passo1 } from './Passo1'
 import { Passo2 } from './Passo2'
 import { Passo3 } from './Passo3'
@@ -32,6 +33,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path='/' component={Dashboard} />
+            <Route path='/emprestimo' component={LoanSelect} />
             <Route path='/passo' component={Passo1} />
             <Route path='/passo2' component={Passo2} />
             <Route path='/sucesso' component={Passo3} />

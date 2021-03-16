@@ -28,6 +28,7 @@ export const DataProvider = ({ children }) => {
     bank_account_type: 'CONTA_CORRENTE_INDIVIDUAL',
     bank_account_num: '132',
     loan_intent: 'BELEZA_E_SAUDE',
+    // loan_type: 'morgage',
   })
 
   const setValues = (values) => {
