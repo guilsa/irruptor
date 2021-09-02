@@ -1,39 +1,35 @@
 # Project notes
 
-Blocked
-  Need html code from passo 3
-    Are select values in english? Curious.
-
-Must
-  Add required html5 validation
-  Validation for other inputs step 1
-  Add TOS checkboxes
-    Tenho restrições no meu nome
-    Tenho casa própria
-    Tenho carro quitado
-    Tenho cartão de crédito
-    Aceito os Termos de Uso, a Política de Privacidade e o Termo de Autorização de Consulta (SCR)
-  Auto disable submit button
+- TODO
+  - Add required html5 validation
+  - Validation for other inputs step 1
+  - Add TOS checkboxes
+    - Tenho restrições no meu nome
+    - Tenho casa própria
+    - Tenho carro quitado
+    - Tenho cartão de crédito
+    - Aceito os Termos de Uso, a Política de Privacidade e o Termo de Autorização de Consulta (SCR)
+  - Auto disable submit button
 
 
-Question
-  input label should be a string or a sentence?
+- Question
+  - Input label should be a string or a sentence?
 
-Best practices
-  Use Prettier
-  Unit tests step 1 
-  Use for label attributes for forms [1]
-  Add FormGroup [1] and FormRow [2]
+- Best practices
+  - Use Prettier
+  - Unit tests step 1 
+  - Use for label attributes for forms [1]
+  - Add FormGroup [1] and FormRow [2]
 
-Nice
-  Add react-icons
-  Add https://github.com/ycs77/bootstrap-steps
-  Benchmark citiesToState read, it's 112 kb
-  Consiser refactor field names to portuguese so its readable to business users
-  Input fields correct/incorrect UX (CSS system)
-  Remove steps image. Use react-step-progress.
-  Use 2 column form styling
-  Use CSS lib for React styling. Remove inline styling.
+- Nices
+  - Add react-icons
+  - Add https://github.com/ycs77/bootstrap-steps
+  - Benchmark citiesToState read, it's 112 kb
+  - Consiser refactor field names to portuguese so its readable to business users
+  - Input fields correct/incorrect UX (CSS system)
+  - Remove steps image. Use react-step-progress.
+  - Use 2 column form styling
+  - Use CSS lib for React styling. Remove inline styling.
 
 
 [1] https://github.com/kentcdodds/bookshelf/blob/83f5daa2578aef3828d9aa80ca46b382f4d4d9a0/src/unauthenticated-app.js#L40
